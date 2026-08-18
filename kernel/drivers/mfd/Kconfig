@@ -1,0 +1,25 @@
+config MFD_SM570X
+	tristate "Silicon Mitus SM570x Power Management IC"
+	depends on I2C
+	select REGMAP_I2C
+	select REGMAP_IRQ
+	select MFD_CORE
+	help
+	  Support for Silicon Mitus SM5703 and SM5705 Power Management ICs.
+	  This driver provides core MFD functionality, IRQ handling, and Regmap support.
+
+config BATTERY_SM570X_FG
+	tristate "Silicon Mitus SM570x Fuel Gauge"
+	depends on MFD_SM570X || COMPILE_TEST
+	select POWER_SUPPLY
+	help
+	  Say Y here to enable battery capacity monitoring for Silicon Mitus
+	  SM5703 and SM5705 chips.
+
+config CHARGER_SM570X
+	tristate "Silicon Mitus SM570x Charger"
+	depends on MFD_SM570X || COMPILE_TEST
+	select POWER_SUPPLY
+	help
+	  Say Y here to enable charger control and USB power detection for
+	  Silicon Mitus SM5703 and SM5705 chips.

@@ -9,7 +9,7 @@ In the tested setup, the kernel package directory was:
 The kernel source checkout was:
 
 ```text
-~/j5-power-port/linux-msm8916
+~/j5x-power-port/linux-msm8916
 ```
 
 Recommended flow:
@@ -18,22 +18,23 @@ Recommended flow:
 2. Enable:
 
 ```text
-CONFIG_BATTERY_SM5703_FUELGAUGE=m
-CONFIG_CHARGER_SM5703_READONLY=m
+CONFIG_BATTERY_SM570X_FG=Y
+CONFIG_CHARGER_SM570X=Y
 ```
 
-3. Merge `kernel/dts/msm8916-samsung-j5-sm5703.dtsi` into the J5 DTS.
+3. Merge `kernel/dts/sm570x.dtsi` into the device DTS.
 4. Generate pmaports patch files from the kernel tree:
 
 ```sh
-cd ~/j5-power-port/linux-msm8916
+cd ~/j5x-power-port/linux-msm8916
 PKGDIR=~/.local/var/pmbootstrap/cache_git/pmaports/device/testing/linux-postmarketos-qcom-msm8916
 
-git add -N drivers/power/supply/sm5703_fuelgauge.c drivers/power/supply/sm5703_charger.c
+P=drivers/mfd
+git add -N $P/sm570x_fuelgauge.c $P/sm570x_charger.c $P/sm570x_irq.c $P/sm570x_core.c $P/sm570x_core.h
 
-git diff -- arch/arm64/boot/dts/qcom/msm8916-samsung-j5.dts > "$PKGDIR/0001-arm64-dts-qcom-msm8916-samsung-j5-add-sm5703-nodes.patch"
-git diff -- drivers/power/supply/Kconfig drivers/power/supply/Makefile drivers/power/supply/sm5703_fuelgauge.c > "$PKGDIR/0002-power-supply-add-sm5703-fuelgauge-readonly.patch"
-git diff -- drivers/power/supply/Kconfig drivers/power/supply/Makefile drivers/power/supply/sm5703_charger.c > "$PKGDIR/0003-power-supply-add-sm5703-charger-charge-control.patch"
+## git diff -- arch/arm64/boot/dts/qcom/msm8916-samsung-j5x.dts > "$PKGDIR/0001-arm64-dts-qcom-msm8916-samsung-j5x-add-sm570x-nodes.patch" # -- ???
+git diff -- drivers/mfd/Kconfig drivers/mfd/Makefile drivers/power/supply/sm570x_fuelgauge.c > "$PKGDIR/0002-power-supply-add-sm570x-fuelgauge-readonly.patch"
+git diff -- drivers/mfd/Kconfig drivers/mfd/Makefile drivers/mfd/sm570x_charger.c > "$PKGDIR/0003-power-supply-add-sm570x-charger-charge-control.patch"
 ```
 
 5. Add patch filenames to `APKBUILD` if not already listed, then run:

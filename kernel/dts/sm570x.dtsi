@@ -1,0 +1,22 @@
+&i2c_main {
+	sm570x: pmic@71 {
+		compatible = "samsung,sm570x-mfd";
+		reg = <0x71>;
+
+		/* Прерывание от линии GPIO SoC */
+		interrupt-parent = <&tlmm>;
+		interrupts = <24 IRQ_TYPE_LEVEL_LOW>;
+		interrupt-controller;
+		#interrupt-cells = <2>;
+
+		sm570x_fg: fuelgauge {
+			compatible = "samsung,sm570x-fuelgauge";
+			interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
+		};
+
+		sm570x_chg: charger {
+			compatible = "samsung,sm570x-charger";
+			interrupts = <1 IRQ_TYPE_LEVEL_LOW>;
+		};
+	};
+};

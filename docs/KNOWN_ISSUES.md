@@ -1,5 +1,7 @@
 # Known issues
 
+## Is not tested yet
+
 ## Fuel-gauge current scaling
 
 The fuel-gauge current sign is useful for detecting charge versus discharge, but the absolute value may still be incorrectly scaled in discharge mode. During testing, negative current appeared around `-127945312`, which is not physically plausible as a direct microampere value.

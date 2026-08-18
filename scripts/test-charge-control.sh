@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
 
-CHG=/sys/class/power_supply/sm5703-charger
-FG=/sys/class/power_supply/sm5703-fuelgauge
+CHG=/sys/class/power_supply/sm570x-charger
+FG=/sys/class/power_supply/sm570x-fuelgauge
 
 show() {
 	echo "=== charger ==="
