@@ -3,7 +3,6 @@
 		compatible = "samsung,sm570x-mfd";
 		reg = <0x71>;
 
-		/* Прерывание от линии GPIO SoC */
 		interrupt-parent = <&tlmm>;
 		interrupts = <24 IRQ_TYPE_LEVEL_LOW>;
 		interrupt-controller;

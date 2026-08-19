@@ -1,10 +1,10 @@
 #!/sbin/openrc-run
 
-description="SM5703 battery store mode 40-60%"
+description="SM5703/SM5705 battery store mode 40-60%"
 
-command="/usr/local/sbin/sm5703-store-mode"
+command="/usr/local/sbin/sm570x-store-mode"
 command_background="yes"
-pidfile="/run/sm5703-store-mode.pid"
+pidfile="/run/sm570x-store-mode.pid"
 
 depend() {
 	need localmount
@@ -12,7 +12,7 @@ depend() {
 }
 
 stop_post() {
-	. /etc/conf.d/sm5703-store-mode
+	. /etc/conf.d/sm570x-store-mode
 
 	if [ "${ENABLE_CHARGE_ON_STOP:-yes}" = "yes" ] && [ -e "$LIMIT_PATH" ]; then
 		echo 0 > "$LIMIT_PATH"

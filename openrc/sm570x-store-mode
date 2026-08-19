@@ -1,11 +1,11 @@
 #!/bin/sh
 set -eu
 
-. /etc/conf.d/sm5703-store-mode
+. /etc/conf.d/sm570x-store-mode
 
 log() {
-	logger -t sm5703-store-mode "$*" 2>/dev/null || true
-	echo "sm5703-store-mode: $*"
+	logger -t sm570x-store-mode "$*" 2>/dev/null || true
+	echo "sm570x-store-mode: $*"
 }
 
 while [ ! -e "$CAP_PATH" ] || [ ! -e "$LIMIT_PATH" ]; do

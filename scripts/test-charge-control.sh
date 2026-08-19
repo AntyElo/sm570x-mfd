@@ -17,12 +17,13 @@ show() {
 	done
 }
 
+this() {
+	printf '\n$1 charge for 5 seconds...\n'
+	echo $2 > "$CHG/charge_control_limit"
+	sleep 5
+	show
+}
+
 show
-printf '\nDisabling charge for 5 seconds...\n'
-echo 1 > "$CHG/charge_control_limit"
-sleep 5
-show
-printf '\nEnabling charge for 5 seconds...\n'
-echo 0 > "$CHG/charge_control_limit"
-sleep 5
-show
+this Disabling 1
+this Enabling  0

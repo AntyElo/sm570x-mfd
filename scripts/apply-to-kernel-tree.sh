@@ -14,22 +14,25 @@ if [ ! -d "$KDIR/drivers/mfd" ]; then
 	exit 1
 fi
 
-for i in sm570x_fuelgauge.c sm570x_charger.c
-do cp "$REPO_DIR/kernel/drivers/mfd/$i" "$KDIR/drivers/mfd/"
+for i in "$REPO_DIR/kernel/drivers/mfd/sm570x*"
+do cp "$i" "$KDIR/drivers/mfd/"
 done
 
 KCONFIG="$KDIR/drivers/mfd/Kconfig"
-MAKEFILE="$KDIR/drivers/mfd/Makefile"
-
 if ! grep -q 'MFD_SM570X' "$KCONFIG"; then
 	cat >> "$KCONFIG" < "$REPO_DIR/kernel/drivers/mfd/Kconfig"
 fi
 
+MAKEFILE="$KDIR/drivers/mfd/Makefile"
 if ! grep -q 'sm570x_fuelgauge.o' "$MAKEFILE"; then
 	cat >> "$MAKEFILE" < "$REPO_DIR/kernel/drivers/mfd/Makefile"
 fi
 
-printf '\nDriver files copied. Now enable these kernel config symbols:\n'
-printf '  CONFIG_BATTERY_SM570X_FG=Y\n'
-printf '  CONFIG_CHARGER_SM570X=Y\n\n'
-printf 'Then merge kernel/dts/sm570x.dtsi into your device DTS.\n'
+cat <<THATSINFO
+
+Driver files copied. Now enable these kernel config symbols:
+  CONFIG_BATTERY_SM570X_FG=Y
+  CONFIG_CHARGER_SM570X=Y
+
+Then merge kernel/dts/sm570x.dtsi into your device DTS.
+THATSINFO
