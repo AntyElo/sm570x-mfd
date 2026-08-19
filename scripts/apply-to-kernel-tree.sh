@@ -7,14 +7,14 @@ if [ $# -ne 1 ]; then
 fi
 
 KDIR="$1"
-REPO_DIR=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+REPO_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 
 if [ ! -d "$KDIR/drivers/mfd" ]; then
 	echo "Not a Linux kernel tree: $KDIR" >&2
 	exit 1
 fi
 
-for i in "$REPO_DIR/kernel/drivers/mfd/sm570x*"
+for i in "$REPO_DIR/kernel/drivers/mfd/sm570x"*
 do cp "$i" "$KDIR/drivers/mfd/"
 done
 

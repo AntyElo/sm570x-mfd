@@ -9,7 +9,7 @@ DTB="$PMOS_ROOTFS/boot/msm8916-samsung-j5.dtb"
 
 pmbootstrap chroot -r -- apk add --allow-untrusted --force-overwrite "/mnt/pmbootstrap/packages/edge/aarch64/$(basename "$PKG")"
 
-ls -lh "$MODDIR"/sm570x_fuelgauge.ko* "$MODDIR"/sm570x_charger.ko* "$DTB"
+ls -lh "$MODDIR"/sm570x-fuelgauge.ko* "$MODDIR"/sm570x-charger.ko* "$DTB"
 scp "$MODDIR"/sm570x-fuelgauge.ko* "$MODDIR"/sm570x-charger.ko* "$DTB" "user@$PHONE_IP:/tmp/"
 scp "$(dirname "$0")/install-openrc-service.sh" "$(dirname "$0")/test-charge-control.sh" "user@$PHONE_IP:/tmp/"
 
